@@ -1,0 +1,1062 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Kraken",
+        "title": "Kraken API",
+        "termsOfService": "Terms of Service",
+        "contact": {
+            "name": "soporte@XXXXX"
+        }
+    },
+    "basePath": "/poirot",
+    "tags": [
+        {
+            "name": "CityEntity Entity",
+            "description": "Repositorio rest para ciudades"
+        },
+        {
+            "name": "CountryEntity Entity",
+            "description": "Repositorio rest para paises"
+        },
+        {
+            "name": "CustomerEntity Entity",
+            "description": "Operaciones sobre customers"
+        },
+        {
+            "name": "DepartmentEntity Entity",
+            "description": "Repositorio rest para departamentos"
+        },
+        {
+            "name": "audit-session-controller",
+            "description": "Audit Session Controller"
+        },
+        {
+            "name": "authentication-controller",
+            "description": "Authentication Controller"
+        },
+        {
+            "name": "people-controller",
+            "description": "People Controller"
+        },
+        {
+            "name": "token-controller",
+            "description": "Token Controller"
+        }
+    ],
+    "paths": {
+        "/api/cities": {
+            "get": {
+                "tags": [
+                    "CityEntity Entity"
+                ],
+                "summary": "Obtiene todas las ciudades",
+                "operationId": "findAllCityEntityUsingGET",
+                "produces": [
+                    "application/json",
+                    "application/hal+json",
+                    "text/uri-list",
+                    "application/x-spring-data-compact+json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Numero de pagina",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Orden desc o asc",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Canitdad de elementos por pagina",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Resources«CityEntity»"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cities/{id}": {
+            "get": {
+                "tags": [
+                    "CityEntity Entity"
+                ],
+                "summary": "Obtiene una ciudad a partir de su identificador",
+                "operationId": "findOneCityEntityUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identificador de la ciudad (numerico autogenerado)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Resource«CityEntity»"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "AuditSessionRequestDTO": {
+            "type": "object",
+            "properties": {
+                "principal": {
+                    "$ref": "#/definitions/PrincipalSessionRequestDTO"
+                },
+                "remoteIp": {
+                    "type": "string"
+                },
+                "userAgent": {
+                    "type": "string"
+                },
+                "userDate": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "title": "AuditSessionRequestDTO"
+        },
+        "AuditSessionResponseDTO": {
+            "type": "object",
+            "properties": {
+                "principal": {
+                    "$ref": "#/definitions/PrincipalSessionDTO"
+                },
+                "remoteIp": {
+                    "type": "string"
+                },
+                "userAgent": {
+                    "type": "string"
+                },
+                "userDate": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "title": "AuditSessionResponseDTO"
+        },
+        "AuthenticationRequest": {
+            "type": "object",
+            "properties": {
+                "custom": {
+                    "type": "object"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "title": "AuthenticationRequest"
+        },
+        "BaseResponseDTO": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "type": "string"
+                },
+                "httpStatus": {
+                    "type": "string",
+                    "enum": [
+                        "100",
+                        "101",
+                        "102",
+                        "103",
+                        "200",
+                        "201",
+                        "202",
+                        "203",
+                        "204",
+                        "205",
+                        "206",
+                        "207",
+                        "208",
+                        "226",
+                        "300",
+                        "301",
+                        "302",
+                        "303",
+                        "304",
+                        "305",
+                        "307",
+                        "308",
+                        "400",
+                        "401",
+                        "402",
+                        "403",
+                        "404",
+                        "405",
+                        "406",
+                        "407",
+                        "408",
+                        "409",
+                        "410",
+                        "411",
+                        "412",
+                        "413",
+                        "414",
+                        "415",
+                        "416",
+                        "417",
+                        "418",
+                        "419",
+                        "420",
+                        "421",
+                        "422",
+                        "423",
+                        "424",
+                        "426",
+                        "428",
+                        "429",
+                        "431",
+                        "451",
+                        "500",
+                        "501",
+                        "502",
+                        "503",
+                        "504",
+                        "505",
+                        "506",
+                        "507",
+                        "508",
+                        "509",
+                        "510",
+                        "511"
+                    ]
+                },
+                "message": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            },
+            "title": "BaseResponseDTO"
+        },
+        "Calendar": {
+            "type": "object",
+            "properties": {
+                "calendarType": {
+                    "type": "string"
+                },
+                "firstDayOfWeek": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "lenient": {
+                    "type": "boolean"
+                },
+                "minimalDaysInFirstWeek": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "timeInMillis": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "timeZone": {
+                    "$ref": "#/definitions/TimeZone"
+                },
+                "weekDateSupported": {
+                    "type": "boolean"
+                },
+                "weekYear": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "weeksInWeekYear": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "Calendar"
+        },
+        "CityDTO": {
+            "type": "object",
+            "properties": {
+                "alternate": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "departmentDTO": {
+                    "$ref": "#/definitions/DepartmentDTO"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "title": "CityDTO"
+        },
+        "CityEntity": {
+            "type": "object",
+            "properties": {
+                "alternate": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "department": {
+                    "$ref": "#/definitions/DepartmentEntity"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "title": "CityEntity"
+        },
+        "CountryEntity": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            },
+            "title": "CountryEntity"
+        },
+        "CustomerEntity": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "birthDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "cellphoneNumber": {
+                    "type": "string"
+                },
+                "city": {
+                    "$ref": "#/definitions/CityEntity"
+                },
+                "department": {
+                    "$ref": "#/definitions/DepartmentEntity"
+                },
+                "dependency": {
+                    "type": "string"
+                },
+                "documentNumber": {
+                    "type": "string"
+                },
+                "documentType": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "fullName": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "grossIncome": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastChangeDate": {
+                    "$ref": "#/definitions/Calendar"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "maritalStatus": {
+                    "type": "string"
+                },
+                "middleName": {
+                    "type": "string"
+                },
+                "nationality": {
+                    "type": "string"
+                },
+                "secondLastName": {
+                    "type": "string"
+                }
+            },
+            "title": "CustomerEntity"
+        },
+        "DepartmentDTO": {
+            "type": "object",
+            "properties": {
+                "alternate": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "title": "DepartmentDTO"
+        },
+        "DepartmentEntity": {
+            "type": "object",
+            "properties": {
+                "alternate": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "title": "DepartmentEntity"
+        },
+        "JokoBaseResponse": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            },
+            "title": "JokoBaseResponse"
+        },
+        "JokoTokenInfoResponse": {
+            "type": "object",
+            "properties": {
+                "audiencie": {
+                    "type": "string"
+                },
+                "errorCode": {
+                    "type": "string"
+                },
+                "expiresIn": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            },
+            "title": "JokoTokenInfoResponse"
+        },
+        "JokoTokenResponse": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "type": "string"
+                },
+                "expiration": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "secret": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            },
+            "title": "JokoTokenResponse"
+        },
+        "Link": {
+            "type": "object",
+            "properties": {
+                "href": {
+                    "type": "string",
+                    "xml": {
+                        "name": "href",
+                        "attribute": true,
+                        "wrapped": false
+                    }
+                },
+                "rel": {
+                    "type": "string",
+                    "xml": {
+                        "name": "rel",
+                        "attribute": true,
+                        "wrapped": false
+                    }
+                },
+                "templated": {
+                    "type": "boolean"
+                }
+            },
+            "title": "Link"
+        },
+        "PersonIdentification DTO": {
+            "type": "object",
+            "properties": {
+                "birthDate": {
+                    "type": "string",
+                    "description": "fecha de nacimiento en formato yyyy-mm-dd",
+                    "allowEmptyValue": false
+                },
+                "documentId": {
+                    "type": "string",
+                    "description": "identificador",
+                    "allowEmptyValue": false
+                },
+                "documentType": {
+                    "type": "string",
+                    "description": "tipo de credencial",
+                    "allowEmptyValue": false
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "apellidos",
+                    "allowEmptyValue": false
+                },
+                "name": {
+                    "type": "string",
+                    "description": "nombres",
+                    "allowEmptyValue": false
+                },
+                "residence": {
+                    "type": "string",
+                    "description": "residencia",
+                    "allowEmptyValue": false
+                }
+            },
+            "title": "PersonIdentification DTO",
+            "description": "detalle de indentificación personal"
+        },
+        "PoirotCustomerRequestDTO": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "birthDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "cellphoneNumber": {
+                    "type": "string"
+                },
+                "city_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "department_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "dependency": {
+                    "type": "string"
+                },
+                "documentNumber": {
+                    "type": "string"
+                },
+                "documentType": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "grossIncome": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "maritalStatus": {
+                    "type": "string"
+                },
+                "middleName": {
+                    "type": "string"
+                },
+                "nationality": {
+                    "type": "string"
+                },
+                "secondLastName": {
+                    "type": "string"
+                }
+            },
+            "title": "PoirotCustomerRequestDTO"
+        },
+        "PoirotCustomerResponseDTO": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "birthDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "cellphoneNumber": {
+                    "type": "string"
+                },
+                "city": {
+                    "$ref": "#/definitions/CityDTO"
+                },
+                "customerId": {
+                    "type": "string"
+                },
+                "department": {
+                    "$ref": "#/definitions/DepartmentDTO"
+                },
+                "dependency": {
+                    "type": "string"
+                },
+                "documentNumber": {
+                    "type": "string"
+                },
+                "documentType": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "errorCode": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "fullName": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "grossIncome": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "links": {
+                    "type": "array",
+                    "xml": {
+                        "name": "link",
+                        "namespace": "http://www.w3.org/2005/Atom",
+                        "attribute": false,
+                        "wrapped": false
+                    },
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }
+                },
+                "maritalStatus": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "middleName": {
+                    "type": "string"
+                },
+                "nationality": {
+                    "type": "string"
+                },
+                "secondLastName": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            },
+            "title": "PoirotCustomerResponseDTO"
+        },
+        "PrincipalSessionDTO": {
+            "type": "object",
+            "properties": {
+                "appDescription": {
+                    "type": "string"
+                },
+                "appId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "userDescription": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            },
+            "title": "PrincipalSessionDTO"
+        },
+        "PrincipalSessionRequestDTO": {
+            "type": "object",
+            "properties": {
+                "appDescription": {
+                    "type": "string"
+                },
+                "appId": {
+                    "type": "string"
+                },
+                "userDescription": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            },
+            "title": "PrincipalSessionRequestDTO"
+        },
+        "Resources«CityEntity»": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CityEntity"
+                    }
+                },
+                "links": {
+                    "type": "array",
+                    "xml": {
+                        "name": "link",
+                        "namespace": "http://www.w3.org/2005/Atom",
+                        "attribute": false,
+                        "wrapped": false
+                    },
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }
+                }
+            },
+            "title": "Resources«CityEntity»"
+        },
+        "Resources«CountryEntity»": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CountryEntity"
+                    }
+                },
+                "links": {
+                    "type": "array",
+                    "xml": {
+                        "name": "link",
+                        "namespace": "http://www.w3.org/2005/Atom",
+                        "attribute": false,
+                        "wrapped": false
+                    },
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }
+                }
+            },
+            "title": "Resources«CountryEntity»"
+        },
+        "Resources«CustomerEntity»": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomerEntity"
+                    }
+                },
+                "links": {
+                    "type": "array",
+                    "xml": {
+                        "name": "link",
+                        "namespace": "http://www.w3.org/2005/Atom",
+                        "attribute": false,
+                        "wrapped": false
+                    },
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }
+                }
+            },
+            "title": "Resources«CustomerEntity»"
+        },
+        "Resources«DepartmentEntity»": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DepartmentEntity"
+                    }
+                },
+                "links": {
+                    "type": "array",
+                    "xml": {
+                        "name": "link",
+                        "namespace": "http://www.w3.org/2005/Atom",
+                        "attribute": false,
+                        "wrapped": false
+                    },
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }
+                }
+            },
+            "title": "Resources«DepartmentEntity»"
+        },
+        "Resource«CityEntity»": {
+            "type": "object",
+            "properties": {
+                "alternate": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "department": {
+                    "$ref": "#/definitions/DepartmentEntity"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "links": {
+                    "type": "array",
+                    "xml": {
+                        "name": "link",
+                        "namespace": "http://www.w3.org/2005/Atom",
+                        "attribute": false,
+                        "wrapped": false
+                    },
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "title": "Resource«CityEntity»"
+        },
+        "Resource«CountryEntity»": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "links": {
+                    "type": "array",
+                    "xml": {
+                        "name": "link",
+                        "namespace": "http://www.w3.org/2005/Atom",
+                        "attribute": false,
+                        "wrapped": false
+                    },
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }
+                }
+            },
+            "title": "Resource«CountryEntity»"
+        },
+        "Resource«CustomerEntity»": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "birthDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "cellphoneNumber": {
+                    "type": "string"
+                },
+                "city": {
+                    "$ref": "#/definitions/CityEntity"
+                },
+                "department": {
+                    "$ref": "#/definitions/DepartmentEntity"
+                },
+                "dependency": {
+                    "type": "string"
+                },
+                "documentNumber": {
+                    "type": "string"
+                },
+                "documentType": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "fullName": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "grossIncome": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastChangeDate": {
+                    "$ref": "#/definitions/Calendar"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "links": {
+                    "type": "array",
+                    "xml": {
+                        "name": "link",
+                        "namespace": "http://www.w3.org/2005/Atom",
+                        "attribute": false,
+                        "wrapped": false
+                    },
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }
+                },
+                "maritalStatus": {
+                    "type": "string"
+                },
+                "middleName": {
+                    "type": "string"
+                },
+                "nationality": {
+                    "type": "string"
+                },
+                "secondLastName": {
+                    "type": "string"
+                }
+            },
+            "title": "Resource«CustomerEntity»"
+        },
+        "Resource«DepartmentEntity»": {
+            "type": "object",
+            "properties": {
+                "alternate": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "links": {
+                    "type": "array",
+                    "xml": {
+                        "name": "link",
+                        "namespace": "http://www.w3.org/2005/Atom",
+                        "attribute": false,
+                        "wrapped": false
+                    },
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "title": "Resource«DepartmentEntity»"
+        },
+        "TimeZone": {
+            "type": "object",
+            "properties": {
+                "displayName": {
+                    "type": "string"
+                },
+                "dstsavings": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "rawOffset": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "TimeZone"
+        }
+    }
+}

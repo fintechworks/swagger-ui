@@ -23,6 +23,8 @@ COPY nginx.conf /etc/nginx/
 
 # copy swagger files to the `/js` folder
 ADD ./dist/* /usr/share/nginx/html/
+ADD ./dist/platapp-specs /usr/share/nginx/html/platapp-specs
+
 ADD ./docker-run.sh /usr/share/nginx/
 
 EXPOSE 8080
